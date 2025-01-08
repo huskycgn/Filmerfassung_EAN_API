@@ -33,8 +33,3 @@ def check_duplicate(ean):
         return False
     else:
         return True
-
-# print(read_db())
-# write_db("test", "64646466")
-
-print(check_duplicate(64646466))
