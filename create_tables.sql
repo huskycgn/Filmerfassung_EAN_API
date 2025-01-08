@@ -1,3 +1,5 @@
+# create script for postgresql
+
 CREATE TABLE PUBLIC.movies (
 	id serial PRIMARY KEY
 	,title VARCHAR(100)
@@ -5,4 +7,4 @@ CREATE TABLE PUBLIC.movies (
 	,ean BIGINT NOT NULL UNIQUE
 	);
 
-# dbsuser IS your user FOR the postgressql-DB
+# dbsuser is your user for the postgressql-DB
