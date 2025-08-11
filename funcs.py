@@ -1,13 +1,14 @@
-from eansearch import EANSearch
+# from eansearch import EANSearch
+import requests
 import psycopg2
 from cred import *
 
+
 def ean_lookup(ean):
-    apitoken = EAN_TOKEN
-    lookup = EANSearch(apitoken)
-    name = lookup.barcodeLookup(ean)
-    print(name)
-    return name
+    header = {"x-rapidapi-key": RAPID_TOKEN}
+    url = f"https://big-product-data.p.rapidapi.com/gtin/{ean}"
+    request = requests.get(url, headers=header)
+    return request.json()["properties"]["title"][0]
 
 def write_db(moviename, ean):
     moviename = moviename.replace("'", "''")
