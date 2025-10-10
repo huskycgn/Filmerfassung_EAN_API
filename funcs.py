@@ -17,6 +17,12 @@ def write_db(moviename, ean):
     cursor.execute(f"INSERT INTO movies (title, ean) VALUES ('{moviename}', {ean})", (moviename,))
     conn.commit()
 
+def remove_movies(ean):
+    conn = psycopg2.connect(f"host={DB_HOST} dbname=movies user={DB_USER} password={DB_PASSWORD}")
+    cursor = conn.cursor()
+    cursor.execute(f"DELETE FROM movies WHERE EAN = {ean}")
+    conn.commit()
+
 
 def read_db():
     conn = psycopg2.connect(f"host={DB_HOST} dbname=movies user={DB_USER} password={DB_PASSWORD}")
@@ -30,7 +36,7 @@ def check_duplicate(ean):
     conn = psycopg2.connect(f"host={DB_HOST} dbname=movies user={DB_USER} password={DB_PASSWORD}")
     cursor = conn.cursor()
     cursor.execute(f"SELECT * FROM movies WHERE ean = '{ean}'")
-    if cursor.fetchall() == []:
+    if not cursor.fetchall():
         return False
     else:
         return True
